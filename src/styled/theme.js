@@ -1,0 +1,5 @@
+export const primary = "#42C2FF"
+export const secondary = "#00FFC6"
+export const tertiary  = "#D82148"
+export const light  = "#ECECEC"
+export const dark  = "#1B1A17"
