@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import Counter from "./Counter"
-import { tambah, kurangi } from '../store/action/productAction'
+import { tambah, kurangi, hapusDariCart } from '../store/action/productAction'
 import { useDispatch } from 'react-redux'
 
 const Cart = styled.div`
@@ -14,6 +14,7 @@ const Cart = styled.div`
     margin: 0.5rem auto;
     background: #fff;
     box-shadow: 1px 1px 10px 1px #777;
+    border:1px solid red;
 
 `
 const CounterContainer = styled.div`
@@ -38,7 +39,7 @@ const CounterTotal = styled.div`
 
 const CartItem = ({item}) => {
     // state
-  const [count , setCount] = useState(0)
+  const [count , setCount] = useState(1)
     const Dispatch = useDispatch()
 
 //   method increment/tambah
@@ -50,9 +51,13 @@ const CartItem = ({item}) => {
     const decrement = id => {
         
         setCount(count - 1)
-        Dispatch(kurangi(id))
-        // if(count === 0) {
-        // }
+        if(count > 1) {
+            Dispatch(kurangi(id))
+        } else if(count === 1) {
+                Dispatch(hapusDariCart(id))
+        }
+       
+        
     }
   return (
     <Cart>

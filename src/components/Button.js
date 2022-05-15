@@ -27,12 +27,12 @@ const WarningButton = styled(MyButton)`
     color: #000;
 `
 
-const Button = ({primary}) => {
+const Button = ({primary,action, text}) => {
     if(primary) {
         
-        return <PrimaryButton>selesai</PrimaryButton>
+        return <PrimaryButton onClick={action}>{text}</PrimaryButton>
     } else {
-        return <WarningButton>Cancel</WarningButton>
+        return <WarningButton onClick={action}>{text}</WarningButton>
     }
 }
 

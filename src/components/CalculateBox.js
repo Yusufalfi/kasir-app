@@ -1,6 +1,10 @@
 import React from 'react'
 import Button from "./Button"
 import styled from 'styled-components'
+import { useDispatch, useSelector } from 'react-redux'
+import { resetCart } from '../store/action/productAction'
+import { useState } from 'react'
+
 
 
 
@@ -13,10 +17,6 @@ box-shadow: 1px 1px 10px 1px #777;
 padding: 0.4rem;
 margin-left: -0.4rem;
 margin-bottom: 10px;
-
-
-
-
 `
 const Total = styled.div`
 display: flex;
@@ -54,30 +54,58 @@ const BtnBox = styled.div`
 display: flex;
 justify-content: space-between;
 
-
-
 `
 
-
-
 const CalculateBox = () => {
+    // dispatch
+    const dispatch = useDispatch()
+    const carts = useSelector(state => state.product.carts )
+    // total semua yg di cart
+    const total =carts.reduce((totalPrice, current ) => totalPrice + current.price, 0)
+    // pembeyaran
+    const [pay, setPay] = useState("")
+    // kembalian
+    const [change , setChange] = useState("")
+    // handleChange input
+    const handleChange = e => {
+        setPay(e.target.value)
+    }
+
+    //method kembalian
+    const calculateChange = () => {
+        // pengurangan total dan pay
+        if(pay > total) {
+         setChange(pay- total)   
+        }
+    }  
+    // method resetCart
+    const reset = () => {
+        dispatch(resetCart())
+        setChange("")
+        setPay("")
+    }
+
   return (
     <Box>
         <Total>
             <h4>Total</h4>
-            <p>2300</p>
+            <p>{total}</p>
         </Total>
         <Pay>
             <p>jml</p>
-            <input type="number" />
+            
+            <input type="number"
+                    value={pay} 
+                    onChange={handleChange}
+                    placeholder='masukan uang pembayaran' />
         </Pay>
         <Change>
             <h4>Kembalian</h4>
-            <p>2300</p>
+            <p>{change}</p>
         </Change>
         <BtnBox>
-            <Button />
-            <Button primary />
+            <Button text="reset" action={reset} />
+            <Button primary action={calculateChange} text="selesai" />
         </BtnBox>
     </Box>
   )

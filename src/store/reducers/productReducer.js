@@ -14,11 +14,11 @@ const productReducer = (state = initialState, action) => {
         default:
             return state
         case "ADD_TO_CART":
-            // cek produk ini di dalam cart
+            // cek produk ini sudah di dalam cart / blom
             const productInCart =  state.carts.find(item =>  item.id === payload )
-            // lalu tambahkan data product kecart
+            // tambahkan data product kecart
             const newItemCart = state.products.find(item => item.id ===payload)
-            //lalu ubah statenya dan cek dahulu
+            //jika produkinchart blom ada maka tambah 
             if(!productInCart) {
                 return {
                     ...state,
@@ -32,7 +32,7 @@ const productReducer = (state = initialState, action) => {
         case "TAMBAH":
             // ambil harganya
             const originalPrice = state.products.find(item => item.id === payload).price
-            // console.log(originalPrice)
+            console.log(originalPrice)
             //cek itemyg berubah harganya
             const incCarts = state.carts.map(item => {
                 if(item.id === payload) {
@@ -47,7 +47,6 @@ const productReducer = (state = initialState, action) => {
                  }
                  })
              
-
                     return {
                     ...state,
                     carts:incCarts
@@ -76,6 +75,17 @@ const productReducer = (state = initialState, action) => {
                             ...state,
                             carts:decCarts
                         }
+                case "HAPUS":
+                    return {
+                        ...state,
+                        carts: state.carts.filter(item =>item.id !== payload)
+                    } 
+                    
+                case "RESET": 
+                return {
+                    ...state,
+                    cart:[]
+                }
      
     }
 }

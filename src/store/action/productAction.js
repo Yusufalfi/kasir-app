@@ -24,3 +24,19 @@ export const kurangi = id => {
 
     }
 }
+
+export const hapusDariCart = id => {
+    return {
+        type: "HAPUS",
+        payload: id
+
+    }
+}
+
+export const resetCart = () => {
+    return {
+        type: "RESET",
+        
+
+    }
+}

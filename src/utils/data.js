@@ -4,7 +4,7 @@ export const products = [
         name: "Kopi Janji Jiwa Vanila",
         image: require("../assets/foods/vanila.png"),
         category: "Minuman",
-        price: 15000
+        price: 21000
     },
     {
         id: 2,
@@ -33,7 +33,7 @@ export const products = [
         name: "Kopi Janji Late",
         image: require("../assets/foods/late.jpg"),
         category: "Minuman",
-        price: 14000
+        price: 22000
     },
     {
         id: 6,
@@ -47,7 +47,7 @@ export const products = [
         name: "Nasi Goreng",
         image: require("../assets/foods/nasgor.jpg"),
         category: "Makanan",
-        price: 65000
+        price: 18000
     },
     {
         id: 8,
